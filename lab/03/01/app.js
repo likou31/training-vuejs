@@ -41,10 +41,8 @@ function initApp() {
             },
 
             pay: function() {
-                this.categorySelected = undefined;
-                this.itemSelected = undefined;
                 this.cart.items = [];
-                this.contact = {};
+                this.contact.lastName = undefined;
             }
         }
     });

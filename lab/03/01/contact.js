@@ -1,12 +1,18 @@
 const contact = {
 
+    data: function(){
+        return {
+            contact:{},
+        };
+    },
+
     props: {
-        // TO BE IMPLEMENTED
+        countries: Array,
     },
 
     methods: {
         emitContactChanged: function() {
-            // TO BE IMPLEMENTED
+            this.$emit('contact-changed', this.contact);
         }
     },
 

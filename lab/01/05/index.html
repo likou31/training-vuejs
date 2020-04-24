@@ -5,6 +5,10 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="movies.js"></script>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body onload="init()">
@@ -15,12 +19,11 @@
         <h3>Afficher une liste à puces avec tous les films qui sont déjà sortis</h3>
         <small>Devrait ressembler à ça</small>
         <ul>
-            <li>
-                Titre du film (année du film)
-                <ul>
-                    <li>Acteur 1</li>
-                    <li>Acteur 2</li>
-                    <li>Acteur 3</li>
+            <li v-for="movie in movies" :key="movie.title" v-if="movie.rating > 2">
+                <span v-if="movie.comingSoon === true" class="title"><font color="red">{{ movie.title }}</font></span>
+                <span v-else class="title">{{ movie.title }}</span>
+                <ul v-for="actor in movie.actors" :key="actor" >
+                    {{ actor }}
                 </ul>
             </li>
         </ul>

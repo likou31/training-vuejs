@@ -1,0 +1,41 @@
+body{
+    background-color:#FFC4B7;
+    text-align: center;
+}
+
+h2 {
+    color:#FF7759;
+    font-family: 'Manrope', sans-serif;
+}
+
+h3{
+    font-family: 'Baloo Paaji 2', cursive;
+    color:#FF542E;
+    text-shadow: -1px -1px white, 1px 1px #333
+}
+
+small{
+    font-style:italic;
+}
+
+li{
+    list-style: none;
+    border-style: solid;
+    border-width: 5px;
+    border-radius:20px;
+    margin-bottom : 10px;
+    padding-bottom:10px;
+    margin-left:400px;
+    margin-right:400px;
+}
+
+.title{
+    font-family: 'Baloo Bhaina 2', cursive;
+    font-size:20px;
+    color:#D1573C;
+    text-shadow: 1px 1px white, -1px -1px #444
+}
+
+ul{
+    font-style:italic;
+}
