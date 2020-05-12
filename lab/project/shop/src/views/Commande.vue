@@ -175,7 +175,6 @@ export default {
         },
         pouvoirPayer() {
             let res = true;
-            console.log('mdr');
             for (const property in this.client) {
                 if (
                     this.client[property] === undefined ||
