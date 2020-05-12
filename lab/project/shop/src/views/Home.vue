@@ -31,8 +31,16 @@
                 </h2>
                 <v-row class="justify-center text-center">
                     <div v-for="category in categories" :key="category.id">
-                        <v-card class="ml-5" id="vcard" @click="goToCatalog(category.id)">
-                            <v-img :src="category.image" height="300" width="300"></v-img>
+                        <v-card
+                            class="ml-5"
+                            id="vcard"
+                            @click="goToCatalog(category.id)"
+                        >
+                            <v-img
+                                :src="category.image"
+                                height="300"
+                                width="300"
+                            ></v-img>
                             DECOUVRIR NOS {{ category.label.toUpperCase() }}
                         </v-card>
                     </div>
@@ -65,19 +73,18 @@ export default {
 </script>
 
 <style>
-#vcard{
-    -webkit-transition: all 1s cubic-bezier( .6, 2, .4, 1);
-	-moz-transition: all 1s cubic-bezier( .6, 2, .4, 1);
-	-ms-transition: all 1s cubic-bezier( .6, 2, .4, 1);
-	-o-transition: all 1s cubic-bezier( .6, 2, .4, 1);
-	transition: all 1s cubic-bezier( .6, 2, .4, 1);
+#vcard {
+    -webkit-transition: all 1s cubic-bezier(0.6, 2, 0.4, 1);
+    -moz-transition: all 1s cubic-bezier(0.6, 2, 0.4, 1);
+    -ms-transition: all 1s cubic-bezier(0.6, 2, 0.4, 1);
+    -o-transition: all 1s cubic-bezier(0.6, 2, 0.4, 1);
+    transition: all 1s cubic-bezier(0.6, 2, 0.4, 1);
 }
 
-#vcard:hover{
-	-moz-transform: scale(1.03);
-	-ms-transform: scale(1.03);
-	-o-transform: scale(1.03);
-	transform: scale(1.03);
-
+#vcard:hover {
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+    transform: scale(1.03);
 }
 </style>

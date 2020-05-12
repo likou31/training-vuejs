@@ -23,16 +23,12 @@
                     </v-col>
                     <v-col cols="1">
                         <v-btn text icon>
-                            <v-icon
-                                @click="sort = 'asc'"
-                                >mdi-arrow-up</v-icon
-                            >
+                            <v-icon @click="sort = 'asc'">mdi-arrow-up</v-icon>
                         </v-btn>
                     </v-col>
                     <v-col cols="1">
                         <v-btn text icon>
-                            <v-icon
-                                @click="sort = 'dsc'"
+                            <v-icon @click="sort = 'dsc'"
                                 >mdi-arrow-down</v-icon
                             >
                         </v-btn>
@@ -40,14 +36,16 @@
                 </v-row>
             </v-container>
         </div>
-        <div class="itemAvailable">
-            {{ itemAvailable }} articles trouvés
-        </div>
+        <div class="itemAvailable">{{ itemAvailable }} articles trouvés</div>
         <div v-if="itemAvailable === 0">
             Aucun article ne correspond à votre recherche.
         </div>
         <v-flex id="flex">
-            <div v-for="item in itemsSortedAndFiltered" :key="item.label" :value="item">
+            <div
+                v-for="item in itemsSortedAndFiltered"
+                :key="item.label"
+                :value="item"
+            >
                 <item :item="item"></item>
             </div>
         </v-flex>
@@ -61,8 +59,8 @@ import Item from '../components/Item.vue';
 export default {
     data() {
         return {
-            category: { 
-                items: [], 
+            category: {
+                items: [],
             },
             brandSelectedForSort: undefined,
             sizeSelectedForSort: undefined,
@@ -74,8 +72,7 @@ export default {
         Item,
     },
 
-    methods:{
-    },
+    methods: {},
     computed: {
         sizeAvailable: function() {
             let res = this.category.items.map(item => item.sizes).flat();
@@ -86,30 +83,36 @@ export default {
             }
             return res;
         },
-        itemAvailable: function(){
+        itemAvailable: function() {
             return this.itemsSortedAndFiltered.length;
         },
-        itemsSortedAndFiltered(){
+        itemsSortedAndFiltered() {
             let res = this.category.items;
 
             //Filters
 
-            if (this.brandSelectedForSort){
-                res = res.filter(item => item.brand === this.brandSelectedForSort);
+            if (this.brandSelectedForSort) {
+                res = res.filter(
+                    item => item.brand === this.brandSelectedForSort,
+                );
             }
-            
-            if (this.sizeSelectedForSort){
-                res = res.filter(item => item.sizes.includes(this.sizeSelectedForSort));
+
+            if (this.sizeSelectedForSort) {
+                res = res.filter(item =>
+                    item.sizes.includes(this.sizeSelectedForSort),
+                );
             }
 
             // Tri du prix
-            if (this.sort){
+            if (this.sort) {
                 if (this.sort === 'asc') {
-                    res.sort((item1, item2) => item1.unitPrice - item2.unitPrice);
-                }
-
-                else if (this.sort === 'dsc') {
-                    res.sort((item1, item2) => item2.unitPrice - item1.unitPrice);
+                    res.sort(
+                        (item1, item2) => item1.unitPrice - item2.unitPrice,
+                    );
+                } else if (this.sort === 'dsc') {
+                    res.sort(
+                        (item1, item2) => item2.unitPrice - item1.unitPrice,
+                    );
                 }
             }
             return res;
@@ -186,10 +189,10 @@ fieldset {
     border: 1px black;
 }
 
-.itemAvailable{
-    margin-top:10px;
-    margin-bottom:10px;
-    margin-left:950px;
-    color:grey;
+.itemAvailable {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 950px;
+    color: grey;
 }
 </style>

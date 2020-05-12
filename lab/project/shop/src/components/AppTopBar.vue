@@ -10,7 +10,11 @@
             >
         </div>
         <v-spacer></v-spacer>
-        <v-menu min-width="600px" :close-on-content-click="false">
+        <v-menu
+            v-if="this.$route.name !== 'Commande'"
+            min-width="600px"
+            :close-on-content-click="false"
+        >
             <template v-slot:activator="{ on }">
                 <v-btn class="ml-5" v-on="on">
                     <span class="mr-2">Mon panier ({{ itemInCart }})</span>
@@ -24,33 +28,35 @@
             <v-card v-else>
                 <v-card-title>Mon panier</v-card-title>
                 <v-row v-for="item in cart.items" :key="item.size">
-                    <v-col cols="0.5">
+                    <v-col cols="0.5"> </v-col>
+                    <v-col cols="6" class="articleInBasket">
+                        {{ item.label }} - {{ item.brand }} ({{ item.size }})
                     </v-col>
-                    <v-col cols="6"  class="articleInBasket">
-                    {{ item.label }} - {{ item.brand }} ({{ item.size }}) 
-                    </v-col>
-                    <v-col cols="3"  class="articleInBasket">x{{ item.quantity }} 
+                    <v-col cols="3" class="articleInBasket"
+                        >x{{ item.quantity }}
                         <v-btn text icon>
-                            <v-icon
-                                @click="addToQuantity(item)"
+                            <v-icon @click="addToQuantity(item)"
                                 >mdi-arrow-up</v-icon
                             >
                         </v-btn>
                         <v-btn text icon>
-                            <v-icon
-                                @click="subToQuantity(item)"
+                            <v-icon @click="subToQuantity(item)"
                                 >mdi-arrow-down</v-icon
                             >
                         </v-btn>
                     </v-col>
-                    <v-col cols="2"  class="articleInBasket">{{ (item.unitPrice*item.quantity).toFixed(2) }} €</v-col>
+                    <v-col cols="2" class="articleInBasket"
+                        >{{
+                            (item.unitPrice * item.quantity).toFixed(2)
+                        }}
+                        €</v-col
+                    >
                     <v-col cols="0.5"></v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="7.5">
-                    </v-col>
+                    <v-col cols="7.5"> </v-col>
                     <v-col cols="4">
-                        Prix Total : {{ (prixTotal).toFixed(2) }} €
+                        Prix Total : {{ prixTotal.toFixed(2) }} €
                     </v-col>
                 </v-row>
                 <v-row>
@@ -61,7 +67,10 @@
                         </v-btn>
                     </v-col>
                     <v-col cols="5">
-                        <v-btn color="white--text black">
+                        <v-btn
+                            color="white--text black"
+                            @click="goToCommande()"
+                        >
                             COMMANDER
                         </v-btn>
                     </v-col>
@@ -86,38 +95,41 @@ export default {
         goToCatalog(categoryId) {
             this.$router.push({ name: 'Catalog', params: { categoryId } });
         },
-        addToQuantity(item){
+        goToCommande() {
+            this.$router.push({ name: 'Commande' });
+        },
+        addToQuantity(item) {
             cartService.incrementCartItem(item.id);
         },
-        subToQuantity(item){
+        subToQuantity(item) {
             cartService.decrementCartItem(item.id);
         },
-        emptyBasket(){
+        emptyBasket() {
             cartService.emptyCart();
-        }
+        },
     },
 
     computed: {
-        itemInCart(){
+        itemInCart() {
             let res = 0;
-            if (this.cart.items === undefined){
+            if (this.cart.items === undefined) {
                 res = 0;
-            }
-            else{
-                for (let i = 0; i < this.cart.items.length; i++){
+            } else {
+                for (let i = 0; i < this.cart.items.length; i++) {
                     res += this.cart.items[i].quantity;
                 }
             }
             return res;
         },
 
-        prixTotal(){
+        prixTotal() {
             let res = 0;
-            for (let i = 0; i < this.cart.items.length; i++){
-                res += this.cart.items[i].unitPrice * this.cart.items[i].quantity;
+            for (let i = 0; i < this.cart.items.length; i++) {
+                res +=
+                    this.cart.items[i].unitPrice * this.cart.items[i].quantity;
             }
             return res;
-        }
+        },
     },
 
     async beforeCreate() {
@@ -136,12 +148,12 @@ export default {
     text-decoration: none;
 }
 
-.emptyBasket{
-    margin:30px;
+.emptyBasket {
+    margin: 30px;
 }
 
-.articleInBasket{
-    border-bottom:1px solid grey;
-    margin-bottom:5px;
+.articleInBasket {
+    border-bottom: 1px solid grey;
+    margin-bottom: 5px;
 }
 </style>
